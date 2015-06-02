@@ -19,8 +19,8 @@
     :builds [{:id "dev"
               :source-paths ["src"]
               :compiler {
-                :main cljs.browser-comms.core
-                :output-to "out/cljs/browser_comms.js"
+                :main cljs-browser-comms.core
+                :output-to "out/cljs_browser_comms.js"
                 :output-dir "out"
                 :optimizations :none
                 :cache-analysis true
@@ -28,8 +28,8 @@
              {:id "release"
               :source-paths ["src"]
               :compiler {
-                :main cljs.browser-comms.core
-                :output-to "out-adv/cljs/browser_comms.min.js"
+                :main cljs-browser-comms.core
+                :output-to "out-adv/cljs_browser_comms.min.js"
                 :output-dir "out-adv"
                 :optimizations :advanced
                 :pretty-print false}}]})

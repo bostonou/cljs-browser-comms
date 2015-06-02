@@ -1,4 +1,4 @@
-(ns cljs.browser-comms.core
+(ns cljs-browser-comms.core
   (:require [cljs.reader :as reader]
             [cljs-uuid-utils.core :as uuid]
             [cljs.core.async :as a]
