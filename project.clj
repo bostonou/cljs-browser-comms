@@ -1,14 +1,13 @@
-(defproject cljs.browser-comms "0.1.0-SNAPSHOT"
-  :description "FIXME: write this!"
-  :url "http://example.com/FIXME"
-
+(defproject com.bostonou/cljs-browser-comms "0.1.0-SNAPSHOT"
+  :description "Lib for communicating between browser windows/tabs."
+  :url "https://github.com/bostonou/cljs-browser-comms"
+  :license {:name "Eclipse Public License"
+            :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0-beta3"]
                  [org.clojure/clojurescript "0.0-3269"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [prismatic/schema "0.3.7"]
                  [com.lucasbradstreet/cljs-uuid-utils "1.0.1"]]
-
-  :node-dependencies [[source-map-support "0.2.8"]]
 
   :plugins [[lein-cljsbuild "1.0.5"]]
 
