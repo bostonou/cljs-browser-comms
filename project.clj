@@ -4,7 +4,9 @@
 
   :dependencies [[org.clojure/clojure "1.7.0-beta3"]
                  [org.clojure/clojurescript "0.0-3269"]
-                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]]
+                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]
+                 [prismatic/schema "0.3.7"]
+                 [com.lucasbradstreet/cljs-uuid-utils "1.0.1"]]
 
   :node-dependencies [[source-map-support "0.2.8"]]
 
