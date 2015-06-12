@@ -1,25 +1,22 @@
 (ns cljs-browser-comms.core
   (:require [cljs.reader :as reader]
-            [cljs-uuid-utils.core :as uuid]
             [cljs.core.async :as a]
-            [cljs.core.async.impl.channels :refer [ManyToManyChannel]]
             [clojure.string :as str]
-            [schema.core :as t :include-macros true]
             [goog.events :as events]
             [goog.events.EventType :as EventType])
   (:require-macros [cljs.core.async.macros :refer [go]]))
 
-(def ^:private uuid (uuid/uuid-string (uuid/make-random-uuid)))
-(def ^:private next-id (atom 0))
+(def ^:private id-prefix (random-uuid))
+(def ^:private id-suffix (atom 0))
 
-(t/defn send! :- t/Bool
+(defn send!
   "Broadcast data to all listening tabs/windows. Data should be serializable
   via pr-str & read-string."
-  [data :- t/Any]
+  [data]
   ;;always add a changing and unique id so the value is different; the event
   ;; will only fire if the value has changed
   (.setItem js/localStorage ::e (pr-str {:data data
-                                         :_id (str uuid (swap! next-id inc))}))
+                                         :_id (str id-prefix (swap! id-suffix inc))}))
   true)
 
 (defn- listener [c e]
@@ -32,21 +29,17 @@
 
 (def ^:private event-key (atom nil))
 
-(def Chan
-  "core.async channel"
-  ManyToManyChannel)
-
-(t/defn listen! :- t/Bool
+(defn listen!
   "Listen for browser communication. Incoming data will be passed along the given
   channel. Will only allow one listener to be attached at any given time."
-  [c :- Chan]
+  [c]
   (if-not @event-key
     (let [key (events/listen js/window EventType/STORAGE (partial listener c))]
       (reset! event-key key)
       true)
     false))
 
-(t/defn unlisten! :- t/Bool
+(defn unlisten!
   "Remove listener for browser communication."
   []
   (if @event-key
